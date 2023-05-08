@@ -1,17 +1,98 @@
-import { Button, VerticalBox } from "std-widgets.slint";
+import { VerticalBox } from "std-widgets.slint";
 
-export component AppWindow inherits Window {
-    in-out property<int> counter: 42;
-    callback request-increase-value();
-    VerticalBox {
-        Text {
-            text: "Counter: \{root.counter}";
-        }
-        Button {
-            text: "Increase value";
+export global Calclogic {
+    callback button-paressed(string);
+}
+
+// struct tt {
+//     text :string
+// }
+
+component Button{
+    in property <string> text;
+    min-width: 50px;
+    min-height: 50px;
+
+    Rectangle {
+        background: ta.pressed? #58f3ba: ta.has-hover ? #51c5bf : #2866f5;
+        animate background { duration:100ms; }
+        border-radius: 5px;
+        border-width: 2px;
+        border-color: self.background.darker(20%);
+        ta:= TouchArea{
             clicked => {
-                root.request-increase-value();
+                // 为发现如何修改指定的方法
+                Calclogic.button-paressed(root.text);
             }
         }
+        padding: 10px;
+    }
+    Text {text: root.text;}
+
+}
+
+export component AppWindow inherits Window {
+    in-out property<int> value: 1;
+    title: "test dome";
+
+    // in property <[[tt]]> table:[
+    //     [
+    //         {text:"1"},
+    //         {text:"2"},
+    //         {text:"3"},
+    //     ],
+    //     [
+    //         {text:"4"},
+    //         {text:"5"},
+    //         {text:"6"},
+    //     ],
+    //     [
+    //         {text:"7"},
+    //         {text:"8"},
+    //         {text:"9"},
+    //     ],
+        
+    // ];
+    GridLayout {
+        padding: 15px;
+        spacing: 10px;
+        Text {text: value;colspan: 3;}
+        // 暂时不支持 动态... 详情:<https://slint-ui.com/releases/0.2.5/docs/cpp/markdown/layouting.html#gridlayout>
+        // for rows in table: Row{
+        //     for i in rows:Button{
+        //         text: i.text;
+        //     }
+        // }
+        Row{
+            Button{text: "AC";}
+            Button{text: "←";}
+            Button{text: "%";}
+            Button{text: "÷";}
+        }
+        Row{
+            Button{text: "7";}
+            Button{text: "8";}
+            Button{text: "9";}
+            Button{text: "*";}
+        }
+        Row{
+            Button{text: "4";}
+            Button{text: "5";}
+            Button{text: "6";}
+            Button{text: "-";}
+        }
+        Row{
+            Button{text: "1";}
+            Button{text: "2";}
+            Button{text: "3";}
+            Button{text: "+";}
+        }
+        Row{
+            Button{text: "±";}
+            Button{text: "0";}
+            Button{text: ".";}
+            Button{text: "=";}
+        }
+        
     }
 }

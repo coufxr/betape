@@ -4,11 +4,10 @@ fn main() -> Result<(), slint::PlatformError> {
     let ui = AppWindow::new()?;
 
     let ui_handle = ui.as_weak();
-    ui.on_request_increase_value(move || {
-        let ui = ui_handle.unwrap();
-        ui.set_counter(ui.get_counter() + 1);
+    ui.global::<Calclogic>().on_button_paressed(move |value| {
+        let app = ui_handle.unwrap();
+        let value = &value;
+        app.set_value(app.get_value()+value);
     });
-
     ui.run()
 }
-
