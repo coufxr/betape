@@ -4,10 +4,6 @@ export global Calclogic {
     callback button-paressed(string);
 }
 
-// struct tt {
-//     text :string
-// }
-
 component Button{
     in property <string> text;
     min-width: 50px;
@@ -32,27 +28,8 @@ component Button{
 }
 
 export component AppWindow inherits Window {
-    in-out property<int> value: 1;
+    in-out property<string> value;
     title: "test dome";
-
-    // in property <[[tt]]> table:[
-    //     [
-    //         {text:"1"},
-    //         {text:"2"},
-    //         {text:"3"},
-    //     ],
-    //     [
-    //         {text:"4"},
-    //         {text:"5"},
-    //         {text:"6"},
-    //     ],
-    //     [
-    //         {text:"7"},
-    //         {text:"8"},
-    //         {text:"9"},
-    //     ],
-        
-    // ];
     GridLayout {
         padding: 15px;
         spacing: 10px;
