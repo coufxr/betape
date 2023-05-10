@@ -1,12 +1,12 @@
 import { VerticalBox } from "std-widgets.slint";
 
 export global Calclogic {
-    callback button-paressed(string);
+    callback button-paressed(string,int);
 }
 
 component Button{
     in property <string> text;
-    in property <int> type : 1;
+    in property <int> typ : 1;
     in property <brush> background: @linear-gradient(20deg,#69e7f0,#2866f5) ;
     min-width: 50px;
     min-height: 50px;
@@ -20,7 +20,7 @@ component Button{
         ta:= TouchArea{
             clicked => {
                 // 为发现如何修改指定的方法
-                Calclogic.button-paressed(root.text);
+                Calclogic.button-paressed(root.text,root.typ);
             }
         }
         padding: 10px;
@@ -31,6 +31,7 @@ component Button{
 
 export component AppWindow inherits Window {
     in-out property<string> value;
+    out property <int> typ;
     title: "test dome";
     min-width: 450px;
     min-height: 650px;
@@ -52,34 +53,34 @@ export component AppWindow inherits Window {
             //     }
             // }
             Row{
-                Button{text: "AC"; type: 3; background: gold;}
-                Button{text: "←"; type: 3; background: yellow;}
-                Button{text: "%"; type: 2;}
-                Button{text: "/"; type: 2;}
+                Button{text: "AC"; typ: 3; background: gold;}
+                Button{text: "←"; typ: 3; background: yellow;}
+                Button{text: "%"; typ: 2;}
+                Button{text: "/"; typ: 2;}
             }
             Row{
                 Button{text: "7";}
                 Button{text: "8";}
                 Button{text: "9";}
-                Button{text: "*";type: 2;}
+                Button{text: "*";typ: 2;}
             }
             Row{
                 Button{text: "4";}
                 Button{text: "5";}
                 Button{text: "6";}
-                Button{text: "-"; type: 2;}
+                Button{text: "-"; typ: 2;}
             }
             Row{
                 Button{text: "1";}
                 Button{text: "2";}
                 Button{text: "3";}
-                Button{text: "+"; type: 2;}
+                Button{text: "+"; typ: 2;}
             }
             Row{
-                Button{text: "±"; type: 4;}
+                Button{text: "±"; typ: 4;}
                 Button{text: "0";}
                 Button{text: ".";}
-                Button{text: "="; type: 5; background: green;}
+                Button{text: "="; typ: 5; background: green;}
             }
             
         }
