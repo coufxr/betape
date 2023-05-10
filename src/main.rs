@@ -39,7 +39,7 @@ fn main() -> Result<(), slint::PlatformError> {
                     };
                     // app.set_value(rusult);
                     app.set_value(slint::SharedString::from(rusult.to_string().as_str()));
-                    state.current_value = 0;
+                    state.current_value = rusult;
                     state.operator = Default::default();
                 } else {
                     state.operator = value.clone();

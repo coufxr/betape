@@ -6,6 +6,7 @@ export global Calclogic {
 
 component Button{
     in property <string> text;
+    in property <int> type : 1;
     in property <brush> background: @linear-gradient(20deg,#69e7f0,#2866f5) ;
     min-width: 50px;
     min-height: 50px;
@@ -33,46 +34,55 @@ export component AppWindow inherits Window {
     title: "test dome";
     min-width: 450px;
     min-height: 650px;
-    GridLayout {
-        padding: 15px;
-        spacing: 10px;
-        Text {text: value;colspan: 3; min-height: 15px; font-size: 20px;}
-        // 暂时不支持 动态... 详情:<https://slint-ui.com/releases/0.2.5/docs/cpp/markdown/layouting.html#gridlayout>
-        // for rows in table: Row{
-        //     for i in rows:Button{
-        //         text: i.text;
-        //     }
-        // }
-        Row{
-            Button{text: "AC"; background: gold;}
-            Button{text: "←"; background:yellow;}
-            Button{text: "%";}
-            Button{text: "÷";}
+    VerticalLayout{
+        Rectangle {
+            background: #7c7c7c;
+            min-width: root.min-width;
+            min-height: root.min-height/10;
+            Text {text: value; font-size: 40px; min-width: parent.min-width; min-height: parent.min-height;}
         }
-        Row{
-            Button{text: "7";}
-            Button{text: "8";}
-            Button{text: "9";}
-            Button{text: "*";}
+        GridLayout {
+            padding: 15px;
+            spacing: 10px;
+            // Text {text: value;colspan: 3; min-height: 15px; font-size: 20px;}
+            // 暂时不支持 动态... 详情:<https://slint-ui.com/releases/0.2.5/docs/cpp/markdown/layouting.html#gridlayout>
+            // for rows in table: Row{
+            //     for i in rows:Button{
+            //         text: i.text;
+            //     }
+            // }
+            Row{
+                Button{text: "AC"; type: 3; background: gold;}
+                Button{text: "←"; type: 3; background: yellow;}
+                Button{text: "%"; type: 2;}
+                Button{text: "/"; type: 2;}
+            }
+            Row{
+                Button{text: "7";}
+                Button{text: "8";}
+                Button{text: "9";}
+                Button{text: "*";type: 2;}
+            }
+            Row{
+                Button{text: "4";}
+                Button{text: "5";}
+                Button{text: "6";}
+                Button{text: "-"; type: 2;}
+            }
+            Row{
+                Button{text: "1";}
+                Button{text: "2";}
+                Button{text: "3";}
+                Button{text: "+"; type: 2;}
+            }
+            Row{
+                Button{text: "±"; type: 4;}
+                Button{text: "0";}
+                Button{text: ".";}
+                Button{text: "="; type: 5; background: green;}
+            }
+            
         }
-        Row{
-            Button{text: "4";}
-            Button{text: "5";}
-            Button{text: "6";}
-            Button{text: "-";}
-        }
-        Row{
-            Button{text: "1";}
-            Button{text: "2";}
-            Button{text: "3";}
-            Button{text: "+";}
-        }
-        Row{
-            Button{text: "±";}
-            Button{text: "0";}
-            Button{text: ".";}
-            Button{text: "="; background: green;}
-        }
-        
     }
+    
 }
